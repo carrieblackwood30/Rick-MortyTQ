@@ -30,5 +30,4 @@
         characterStore.getCharacters()
     })
 
-
 </script>
