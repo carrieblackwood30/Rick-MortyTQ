@@ -3,14 +3,16 @@
         <Pagination v-if="characterStore.characters[0]"
         :items = "characterStore.characters[0]"
         :itemsPerPage = "6"
+        @update:SortByName="filterByName"
         ></Pagination>
-
             </section>
+        
+
 </template>
 
 <style scoped>
     .showcase__Inner{
-        background-color:rgb(39, 43, 51);
+        background-color:rgb(32, 35, 41);
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -25,6 +27,15 @@
     import { onBeforeMount } from 'vue';
 
     const characterStore = useCharactersStore()
+
+
+    const filterByName = () =>{
+        characterStore.characters = characterStore.characters[0].sort((a,b) =>{
+                if(a.name < b.name) return -1
+                if(a.name > b.name) return 1
+            return 0
+        })
+    }
 
     onBeforeMount(() => {
         characterStore.getCharacters()
